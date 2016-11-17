@@ -1,0 +1,525 @@
+Which Framework?
+
+Struts - lots of people lost loyalty
+
+Wicket - light weight
+
+GWT
+
+JSF - from Oracle
+
+Stripes
+
+Spring MVC : 
+
+can be based on Restful,JSP..
+
+What is Spring MVC?
+-A web framework built around the principles of Spring
+-POJO based and Interface driven
+-Based on a Dispatcher Servlet/Front Controller pattern
+ MVC stands for Model-View-Controller
+-Very lightweight and unobtrusive compared to other frameworks
+-Build from the shortcomings on Struts 1
+-Support for:
+ Themes
+ Locales/i18n
+ Restful services
+ Annotation based configuration
+ Seamless integration with other Spring Services/Beans
+
+History
+
+Milestone Release(2003)
+1.0 Release(2004) - introduced MVC
+1.2.6 Jolt Award 2006
+2.0 2006 
+2.5 Annotation 2007
+3.0 2009 configuration using Java, no need to use XML
+
+
+Architecture
+------------
+Java Servlets/JEE -> Spring MVC -> Custom App
+
+
+Request/Response Lifecycle
+---------------------------
+
+Incoming request-------> FrontController------>Delegate Request---->Controller------->BackEnd(web services,db..)
+
+------>create Model-------->Delegate Rendering ----Front Controller-----Model----View Template(Render Response)
+
+
+
+Vocabulary
+
+DispatcherServlet - (Front Controller) The entry/configuration point for the Application
+
+Controller - Command pattern object that handles the request and determines which view to route to
+
+
+RequestMapping - The url and request type that a method is tied to
+
+ViewResolver - Used to locate JSP pages or whatever view we are using
+
+Servlet-config - Configuration file per DispatcherServlet
+
+POJO - Plain Old Java Object , private data members, no arg constructor
+
+Bean - A Spring configured POJO
+
+
+Summary
+-J2EE based
+-Built around best practice patterns
+-Stable release cycle(avg 18 months!)
+-Backwards compatible
+-Very active community
+-Lightweight and unobtrusive as compare to other frameworks
+-Flexible to use with Web Services, JavaScript UI, standard HTML etc..
+
+Maven
+-----
+Using Maven we only need three dependencies
+Dependencies:
+spring-webmvc
+servlet-api
+jstl
+
+
+Maven Project - maven-archetype-webapp
+
+Group Id: com.capgemini
+Artifact Id:FitnessTracker    (application name)
+
+package : com.capgemini.FitnessTracker
+
+Add dependency : add button 
+----------------
+Group Id : org.springframework
+Artifact Id : spring-webmvc
+Version : 3.2.0 RELEASE  scope : compile(default)
+
+Group Id : javax.servlet
+Artifact Id : servlet-api
+Version : 2.5  scope : provided
+
+Group Id : javax.servlet
+Artifact Id : jstl
+Version : 1.2  scope : compile(default)
+
+Spring MVC Configuration
+------------------------
+Configure web.xml
+Configure servlet-config.xml
+Add Controller
+Add view
+
+
+Views:
+------
+src
+ main
+   webapp
+     WEB-INF
+       jsps
+         Home.jsp
+         addTime.jsp
+       web.xml
+
+jsp pages in jsps folder - security reason
+
+InternalResourceViewResolver
+
+addTime.jsp = http://localhost:8080/fitness/addTime   ??
+
+Controllers
+-----------
+Annotation based ( @Controller)
+Named whatever you want
+ Typically named around business domain
+Path set using annotation
+ @RequestMapping
+Examples:com.fitness.controllers.TimeContoller
+http://localhost:8080/fitness/time
+http://localhost:8080/fitness/addTime
+http://localhost:8080/fitness/updateTime
+
+
+web.xml
+-------
+if there is old dtd declaration in web.xml, replace it with xsd
+
+<servlet>
+  <servlet-name>fitTrackerServlet</servlet-name>
+  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+<!--exact location of configration file ..recommended -->
+  <init-param>
+     <param-name>contextConfigLocation</param-name>
+     <param-value>/WEB-INF/config/servlet-config.xml</param-value>
+  </init-param>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>fitTrackerServlet</servlet-name>
+  <url-pattern>*.html</url-pattern>
+</servlet-mapping>
+
+
+
+namespace in context file :
+-----------
+xmlns:mvc
+
+<mvc:annotation-driven />
+<context:component-scan base-package="com.training.controller"/>
+<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+
+
+configuring the servlet-config.xml
+-----------------------------------
+WEB-INF
+   config-----------create folder
+     servlet-config.xml-------------spring configration file
+
+configure namespaces:
+beans
+context
+mvc
+
+<mvc:annotation-driven />
+<context:component-scan base-package="com.crescent.controller"/>
+<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+
+
+Creating a controller:
+-----------------------
+create a folder structure
+src/main/java
+right click to folder - build path - use as source folder
+
+add class : HelloController under package com.crescent.controller
+
+package com.crescent.controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+@Controller
+public class HelloController
+{
+   @RequestMapping(value="/greeting")
+   public String sayHello(Model model)
+   {
+      model.addAttribute("greeting","Hello World");-----like a HashMap
+      return "Hello";
+   }
+}
+
+create JSP and Configuration :
+------------------------------
+WEB-INF
+  jsp-----------create a folder
+    hello.jsp
+
+once again ensure that you put jsp file in proper place
+  src
+    main
+      java
+      webapp
+         WEB-INF
+            config
+            jsp
+
+<h1>${greeting}</h1>
+
+
+servlet-config.xml
+--------------------
+
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<property name="prefix" value="/WEB-INF/jsp/" />
+<property name="suffix" value=".jsp" />
+</bean>
+
+OR
+
+servlet-config.xml-use namespaces section
+select checkbox for  p -heep://www.springframework.org.schema/p
+
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+
+
+right click to server - add or remove - can add the project now.
+
+localhost:8080/FitnessTracker/greeting.html
+
+
+Architecture :
+--------------
+
+view generally communicates with model through controller
+
+Repository also refered as DAO
+
+Controller
+----------
+Handles incoming requests and building the response
+Business logic should not be handled here
+Works with the Service and Repository tier for business logic and data gathering
+Annotated with @Controller
+Handles exceptions and routs the view accordingly
+
+Service
+-------
+Annotated with @Service
+The service tier describes the verbs(actions) of a system
+Where the business logic resides
+ensures that the business object is in a valid state
+where transactions often begin(two phase commits)
+often has the same methods as the Repository, but different focus
+
+Repository
+----------
+Annotated with @Repository
+The Repository tier describes the nouns(data) of a system
+Focused on persisting and interacting with the database
+One-to-one mapping with an object(thats not always the case!)
+
+
+
+
+Responsibilities 
+----------------
+Interpret user input and transform to input to a model
+Provide access to business logic 
+Determines view based off of logic
+Interprets exceptions from the business logic/service tier
+
+
+
+
+view : velocity,freemarker..
+jsp under webinf - cannot be deeplink or bookmark
+security - navigate through framework
+
+View Resolvers(some)
+BeanNameViewResolver
+ContentNegotiatingViewResolver - multiple content type..html xml json in the same application
+FreeMarkerViewResolver
+InternalResourceViewResolver
+JasperReportsViewResolver
+ResourceBundleViewResolver - Internationalization
+TilesViewResolver
+UrlBasedViewResolver
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

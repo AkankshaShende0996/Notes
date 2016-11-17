@@ -1,0 +1,135 @@
+               Course outline
+1)Introduction to SVN
+2)Setting up SVN
+3)Basic Commands
+4)Branching and Merging
+5)Best Practices
+
+
+
+1)Introduction to SVN(Subversion)
+What is Source Control
+About SVN
+Architecture
+Repository Structure
+
+What is Source Control?
+-Code storage
+-Versioned
+-Facilitates multiple developers
+
+
+Types of Source Control
+-Locking
+-Merging(SVN)
+-Distributed(Git)
+
+History of SVN
+-Created by CollabNet in 2000
+ Designed to be like CVS but better
+-Became a top-level Apache project in Feb 2010
+
+
+About SVN
+---------
+-Merge based
+ Developers check out local copies of code
+ Changes to the same file are 'merged'
+-Commits are atomic
+-Uses properties for metadata
+-Branching and tagging are copies
+-Different implementations
+
+Basic Architecture
+------------------
+	Working Copy
+
+	SVN Client
+
+	Services(Apache/SVN server)
+
+	Repository
+
+	File System
+
+
+
+SVN Client can communicate with Repository apart from Services
+
+
+Repository Structure
+--------------------
+Repositories
+   scratch
+     branches
+     tags
+     trunk
+
+Branches
+--------
+-Branched code goes here
+-Uses copy to be efficient
+
+-Can branch any part of code
+-Branches are like new trees
+
+	
+  
+Tags
+-Just a name for a revision
+-Also  is a copy, but read only
+ Doesn't take up additional space
+
+
+Setting up SVN
+--------------
+Installing SVN Server
+Creating a Repository
+Installing Tortise SVN
+Initial Checkout
+First commit
+
+Installing a svn server
+visual svn server - windows 64 bit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

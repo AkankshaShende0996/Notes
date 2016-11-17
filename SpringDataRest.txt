@@ -1,0 +1,62 @@
+Spring Data Rest
+
+how it is useful with data layer
+
+how it is useful in enterprise environment
+
+Level 0 - RPC Services
+Level 1 - Resources
+Level 2 - Verbs
+Level 3 - Hypermedia HATEOAS
+Spring data rest - level 2 and 3
+
+
+Recommended book - Restful web apis 
+OREILLY
+
+Learning path :
+Java - Spring core - Spring data - Spring Data Rest
+
+Spring Data Rest - REST, Spring MVC
+Spring Data - JPA/JDBC/etc. databases
+
+Pluralsight courses
+Spring fundamentals - Bryan Hansen
+Spring with JPA and Hibernate - Bryan Hansen
+Introduction to Spring MVC - Bryan Hansen
+REST fundamentals - Howard Dierking
+Getting Started with Spring Data JPA - Dan Bunker
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,491 @@
+What is Spring?
+
+A framework originally built to reduce the complexities of Enterprise Java Developement.
+POJO based and Interface driven
+
+lightweight
+
+AOP/Proxies
+
+Built around patterns and best practices(Singleton,Factory,Abstract Factory)
+
+Template Method
+
+Annotation based configuration
+
+
+History
+Milestone Release 2003
+1.0 Release 2004
+1.2.6 Jolt Award 2006
+2.0 Release(2006)
+2.5 Release(2007)--------annotation introduced
+3.0 web services 2009
+3.1 Release 2011
+3.2 Release 2012
+
+What Problem is Spring Solving?
+The problem :
+Testability
+Maintainability
+Scability
+Complexity
+Business Focus
+The solution:
+Removes configuration/lookup code
+Developers can focus on the business needs
+Code can focus on testing
+Annotation or XML based development
+
+How it works
+-Everything is a simple POJO
+-Essentially a glorified HashMap
+-Can be used as a Registry(autowired)
+
+
+com.crescent.model;
+
+class Customer
+{
+     String firstName;
+     String lastName;
+
+    getter and setter
+}
+
+com.crescent.repository
+
+import java.util.*;
+import com.crescent.model.Customer;
+public class HibernateCustomerRepositoryImpl
+{
+    public List<Customer> findAll()
+    {
+      List<Customer> customers = new ArrayList<Customer>();
+
+      Customer customer=new Customer();
+      customer.setFirstName("A");
+      customer.setLastName("B");
+
+      customers.add(customer);
+      return customers;
+   }
+}
+
+right click to class - source  -refactor - extract interface - write interface name CustomerRepository
+
+
+service tier(business logic)
+-----------------------------
+com.pluralsight.service
+
+public class CustomerServiceImpl
+{
+private CustomerRepository customerRespository = new HibernateCustomerRepositoryImpl();
+
+public List<Customer> findAll
+{
+   return customerRepository.finaAll();
+
+}
+
+right click - refactor - extract methods -CustomerService
+
+
+class Application 
+{
+   main..
+   CustomerService service = new CustomerServiceImpl();
+   System.out.println(service.findAll().get(0).getFirstName());
+
+}
+
+
+Spring is all about removing configuration code in your project.
+
+hard to move to diff environment..
+testing - unit testing(hard and complex) the way code  is written
+testing is not hard its hard configuration .
+
+If you are using Java 8, you need to use Spring 4.x You will also need to include the spring aop jars in 
+your project or you will get errors.
+
+spring-beans
+spring-context
+spring-core
+spring-expression
+
+spring-aop ------------in jdk 8--not required after checking
+
+commons-logging    third party jar
+
+
+one of the way to add jars
+create folder libs
+copy jars in libs
+
+right click to libs - add to classpath
+
+standard naming convention for xml file - applicationContext.xml
+
+
+There are namespaces that aid in configuration and validation
+
+
+
+
+XML Configuration
+------------------
+Beans 
+ -Essentially classes
+ -Defining beans replaces using the keyword "new"
+ -Define the class, use the interface
+
+Constructor Args
+ -Used to reference properties of the constructor
+
+Properties
+ -Getters and Setters of the POJO that we are working with
+
+References
+ -References to other beans that we have defined.
+
+Values
+ -Basic primitive values that we are setting on our POJO
+
+Beans
+------
+Id or Name
+-can be used interchangeably
+-id has to be a valid XML identifier
+ can't contain special characters ie:"*","/","." till 3.0
+-name can contain special characters
+ often doesn't matter with just spring, but when building URLs with Spring MVC can be problematic
+
+Default No-args constructor
+ -Setter injection vs constructor injection
+
+Class
+
+--------------------------------
+Setter vs Constructor Injection
+--------------------------------
+Setter injection is more common
+
+Constructor injection guarantees the contract
+
+
+autowire="byType|byName|constructor"
+
+
+Component Scanner
+-----------------
+Part of the context namespace
+
+xmlns:context="http...."
+
+Two elements needed to configure
+<context:annotation-config/>
+<context:component-scan base-package="com.crescent"/>
+
+under crescent it checks from model,view..whatever packages under crescent
+
+Stereotype Annotations
+----------------------
+@Component,  @Service,  @Repository
+
+Semantically the same
+@Service and @Repository both extend @Component but don't add any features
+
+@Component
+ Regular components/beans, any POJO
+@Service
+ service tier where business logic is contained
+@Repository
+-Data Access tier/database interaction layer
+
+@Repository("customerRepository")
+public class CustomerRepositoryImpl implements CustomerRepository
+{..}
+
+
+@Service("customerService")
+public class CustomerServiceImpl implements CustomerService
+{..}
+
+
+Autowired annotation on 3 levels
+
+-Member variables---uses reflection
+-constructor
+-setter--------while calling
+
+@Service("customerService")
+public class CustomerServiceImpl implements CustomerService
+{
+   @Autowired
+   private CustomerRepository customerRepository;
+
+  ..
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

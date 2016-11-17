@@ -1,0 +1,85 @@
+To write lambda expressions in Java 8
+To leverage them to create new API
+To efficiently use the new collections
+To avoid useless computations in implementing map/filter/reduce
+To build and use simple streams
+
+
+Method references - alternative syntax for Lambda expressions.
+
+
+Runnable r = new Runnable(){...};
+We can execute this in another thread
+Executors.newSingleThreadExecutor().execute(r);
+What Did we do?
+we wrote some code in an anonymous class
+and we passed it to another piece of code
+That executed it "later"
+
+Comparator<String> comparator = new Comparator<String>(){
+  public int compare(String s1,String s2)
+  {
+      Integer.compare(s1.length(),s2.length());
+  }
+};
+Comparator<String> comparator = 
+   (String s1,String s2) ->
+     return Integer.compare(s1.length(),s2.length()); 
+
+return keyword is required in case of more than one statement.
+
+One can put modifiers on the parameters of a lambda expression
+-The final keyword
+-Annotations
+It is not possible to specify the returned type of a lambda expression
+
+-We can also omit the types of parameters
+(String s1,String s2) -> {
+System.out.println("I am comparing strings");
+return Integer.compare(s1.length(),s2.length());
+}
+
+
+(s1,s2) -> {
+System.out.println("I am comparing strings");
+return Integer.compare(s1.length(),s2.length());
+}
+
+
+
+Method References
+Function<Person, Integer> f = person -> person.getAge();
+As there is only one statement no return type
+Function<Person,Integer> f=Person::getAge;
+
+matter of readability between these two
+
+Consumer<String> printer = s->System.out.println(s);
+Consumer<String> printer = System.out::println;
+
+lambda expression - 
+New way of writing instances of anonymous classes
+An alternative syntax:method references
+
+How to create new API
+Lambdas+default methods+static methods
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

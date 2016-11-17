@@ -1,0 +1,700 @@
+What is Git?
+Version Control System(VCS)
+Git is Distributed Version Control System(DVCS)
+
+DVCS : Branch, Merge, Commit, Push, Pull
+       Very fast, Scalable, Distributed, Parallel
+
+A Brief Histroy of Version Control:
+
+First Generation
+-operated on single file
+-No networking
+e.g. SCCS,RCS
+
+Second Generation
+-Multi file
+Centralized
+e.g. CVS,VSS,SVN Subversion,TFS, Perforce
+
+Third Generation
+-Changesets
+-Distributed
+e.g. Git,Hg,Bazaar,BitKeeper
+
+
+Advantages of DVCS (Distributed Version Control Systems)
+Different topologies
+-Centralized
+ Developers push changes to one central repository
+-Hierarchical
+ Developers push changes to subsystem-based repositories
+ Sub-system repositories are periodically merged in a main repository(linux kernal..)
+-Distributed
+ Developers push changes to their own repository
+ Project maintainers pull changes into the official repository
+
+Backups are easy
+ -Each clone is a full backup
+
+Reliable branching/merging
+ -Feature branches
+ -Always work under version control
+ -Applying fixes to different branches
+
+Full local history
+-Compute repository statistics
+-Analyze regressions
+
+New ideas
+-Deployment
+  - git push heroku prod_branch
+
+
+About Git
+-Created by Linus Torvalds, who also created Linux
+-Prompted by Linux-BitKeeper separation
+-Started in 2005
+-Written in Perl and C
+-Runs on Linux, OS X, Windows and many other operating sytems
+-Design goals
+ Speed
+ Simplicity
+ Strong branch/merge support
+ Distributed
+ Scales well for large projects
+
+Install git.exe from https://git-scm.com/downloads
+
+type git on command prompt
+
+D:\ItsAllAboutGithub> mkdir test
+
+
+D:\ItsAllAboutGithub>cd test
+
+D:\ItsAllAboutGithub\test>git
+
+D:\ItsAllAboutGithub\test>git init
+Initialized empty Git repository in D:/ItsAllAboutGithub/test/.git/
+
+Configuration Git(3 levels)
+1)System-level configuration
+2)User-level configuration
+3)Repository-level configuration
+
+git init------once again - reinitialized
+
+---------------------------------------------------------
+Working Locally with Git
+---------------------------------------------------------
+Overview
+Creating a local repository
+Adding files
+Commiting changes
+Viewing history
+Viewing a diff
+Working copy, staging and repository
+Deleting files
+Cleaning the working copy
+Ignoring files with .gitignore(log files...build..)
+
+---------------------------------------------------------
+---------------------------------------------------------
+init - to create a repository
+
+git init
+
+=> .git repository(folder) is created
+
+echo "Hello,Git" >readme.txt
+or
+notepad readme.txt   and then type some contents
+
+
+
+git status - current status of local repository(non commited changes)
+ which shows you untracked files:
+
+git add readme.txt------------add files to the repository
+
+git status
+ changes to be committed      
+ 
+git commit -m "first commit" ----------commit to local repository
+
+git log - to view history , changes that have commited
+
+git add *.*
+
+change in a file
+
+git status
+
+git checkout????????????
+
+git add -u
+=>only adds updated file.(changes or deletes)
+
+git add -A
+=>add all files
+
+push - push to the central repository
+pull - pull changes down from another repository
+       can pull from multiple origin, not supported in windows, but supported in command line
+
+merge - to merge changes
+
+git-checkout - Switch branches or restore working tree files
+e.g.
+
+notepad dd.txt
+one
+
+git add dd.txt
+notepad dd.txt
+two
+git status
+git checkout dd.txt=> two will not be added.
+no pending changes now.
+
+cleaning working copy
+
+notepad temp1.txt temp2.txt
+git clean -n 
+=> would remove temp1.txt temp2.txt
+git clean -f
+Removing temp1.txt temp2.txt
+-------------------------------------------------------------------------
+
+change the file twice, commit it and to see the difference
+git diff dd6819..a15ec6(commit code which you can see using git log)
+or
+git diff head~1..head
+
+What is Git?
+
+Version Control System("VCS")
+
+It will track your changes and allow you to commit changes.
+
+DVCS Distributed Version Control System("DVCS") - This makes git differnt as compare to tradtional versioning systems.
+
+
+Branch  Merge  Commit Push Pull
+
+Commits happen locally
+It makes branching and merging easier 
+
+Very fast
+Scalable
+Distributed
+Parallel
+
+init - to create a repository
+status - current status local repository, show you non commited changes(doesn't show you 
+         if you have anything commited and not pushed)
+add - add files to the repository
+commit - commit to local repository
+log - see changes
+push - push to central repository
+pull - pull from central repository
+merge - merge changes from separate places/branches
+
+
+staging - saving multiple...?
+
+git push origin
+
+
+
+
+---------------------------------------------------------
+Working Remotely with Git
+---------------------------------------------------------
+Cloning a remote repository
+Listing remote repositories
+Fetching changes from a remote
+Merging changes
+Pulling from a remote
+Pushing changes remotely
+Working with tags
+
+Git protocols
+http(s) 80/443
+git 9418
+ssh 22
+
+
+git clone   "url"
+
+git pull "url"
+
+git branch => to view all branches
+
+git branch -r => to view remote branches
+--------------------------------------------
+git clone https://github.com/sanjaydegaonkar/jubilant-fiesta
+
+cd ./jubilant-fiesta
+create one notepad file
+>git add one.txt
+
+>git status
+ to view untracked file
+>git commit -m "one created"
+
+>git push origin
+
+systematic process add commit(staging)
+edit file
+>git add one.txt
+>git commit -m "emp added"
+>git push origin
+
+why individual commits - consider a scenario of multiple developers working on same project
+we should be able t identify individual commits.
+---------------------------------------------------
+
+
+
+tags : by default tags are not pushed if you want :
+git push --tags
+
+Branching, Merging and Rebasing with Git :
+------------------------------------------
+To view list of commits on current branch
+>git log --graph --oneline
+
+To view list of commits on all branches
+>git log --graph --oneline --all --decorate
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------
+---------------------------------------------------------
+
+git clone https://github.com/sanjaydegaonkar/MasteringTrainingJuneBatch.git
+=> it will download the copy
+go to downloaded folder(say cibatch)
+cd cibatch
+git log => see the history of commit...
+
+more suitable format
+git log --oneline
+
+
+
+
+
+Outline :
+ 
+What is GitHub?
+
+Getting set up with GitHub
+
+Managing Repositories
+
+Organizations and Accounts
+
+Working with and Managing Teams
+
+Configuring Permissions
+
+Managing Information
+
+
+
+
+
+What is GitHub?
+GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+
+Hosted Git repositories(hub for gitbased projects)
+Project Collaboration(as a group)
+Social Coding
+
+active cat : all over place (logo)
+
+Create a new repository?
+
+There are two places where we can create repository 
+1)on button
+2)using icon(top right)
+
+while creating repository ?
+
+Add gitignore None,java,csharp??????????????????????????????
+gitignore - make you development lot easier,,,,,standard exclusion
+
+Add a license : apache, MIT, BSD
+
+Initialize this repository with a README
+ This will let you immediately clone the repository to your computer. Skip this step if you are importing an
+ existing repository.????????????????????????????????????????????????
+
+
+
+Settings:
+can rename your repository
+
+Features
+Wikis - documentations
+Restrict editing to collaborators only
+Issues
+
+Merge button
+
+GitHub pages
+Create a beautiful site for your project with GitHub pages generator.
+
+Danger zone
+Making repository private
+Transfer ownership
+Delete this repository
+
+Updates were rejected because the tip of your current branch is behind
+its remote counterpart. Integrate the remote changes e.g. git pull before pushing again
+??????????????????????????????????????
+
+The current branch has no upstream branch.
+
+
+Create a branch
+
+When you're working on a project, you're going to have a bunch of different features or ideas in progress at any given time – some of which are ready to go, and others which are not. Branching exists to help you manage this workflow.
+
+When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the master branch, so you're free to experiment and commit changes, safe in the knowledge that your branch won't be merged until it's ready to be reviewed by someone you're collaborating with.
+
+ProTip
+
+Branching is a core concept in Git, and the entire GitHub Flow is based upon it. There's only one rule: anything in the master branch is always deployable.
+
+Because of this, it's extremely important that your new branch is created off of master when working on a feature or a fix. Your branch name should be descriptive (e.g., refactor-authentication, user-content-cache-key, make-retina-avatars), so that others can see what is being worked on.
+
+
+
+https://guides.github.com/activities/forking/
+
+Forking
+-------
+After using GitHub by yourself for a while, you may find yourself wanting to contribute to someone else’s project. Or maybe you’d like to use someone’s project as the starting point for your own. This process is known as forking.
+
+
+
+commit - 2
+
+click on commit to view commit details
+
+
+Account - one person taken own repository
+Organization
+e.g. https://github.com/github
+
+you can create new issue (e.g. bug info..,duplicate, invalid)
+
+watch/unwatch related to issue
+
+wiki - documentation
+
+pages - some predefined layouts you can use for wonderful presentation.
+        automatically gh-pages branch created
+
+
+two ways to handle conflicts:
+1)Merge
+2)Rebase
+
+git mergetool --tool-help
+  kdiff3
+  tortoisemerge
+  vimdiff
+  vimdiff2
+  user-defined:bc3, p4
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

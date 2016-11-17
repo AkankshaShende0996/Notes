@@ -1,0 +1,39 @@
+Bootstrap
+
+open source framework for building web sites
+
+-A bit of CSS
+-A bit of JavaScript
+-Modular
+-covers the 80% of the Metaphors
+
+
+Mbile First Responsive Web Design
+Main CSS(Common Design)(0-480)
+>480px
+>768px
+>992px
+>1200px
+these are the 5 levels used by bootstrap3
+
+
+
+Bootstrap 3
+Change to support Mobile First 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

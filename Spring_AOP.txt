@@ -1,0 +1,222 @@
+AOP is a very powerful tool
+Foundation of Spring
+Seldom used fully
+Trainings and books often academic
+
+AOP allows you to add enterprise functionality to your application
+Transactions, security
+
+AOP reduces boiler plate code
+
+Modules
+========
+-DI
+-Why AOP
+ How AOP helps to solve problems in enterprise applications
+
+Advice Deep Dive
+
+-What code can be used in aspects?
+
+Pointcut Deep Dive
+-How to define where aspects are added to your application.
+
+
+Expressing Architecture Using Pointcuts
+-Make architecture a part of your application
+
+How aspects are added to objects
+
+Spring AOP vs AspectJ
+
+Spring Aspect Library
+
+Real Life Aspects
+-Some ideas for your own aspects
+
+
+Prerequisites
+=============
+Java 
+Basic Spring - DI
+Maven/STS
+
+DI
+==
+-do not create objects
+-have them inject instead
+-easier to configure
+-more flexible
+-easier to test
+
+@Autowired for DI
+-----------------
+Marks a field or setter to inject an object
+public class SimpleService
+{
+   @Autowired
+   SimpleRepository repository;
+
+   public DomainObject service()
+   {
+       return repository.findDomainObject();
+   }
+}
+
+How can Spring know what to inject?
+Inject object must be a Spring Bean
+
+Spring Bean Annotations
+-----------------------
+@Service or @Repository mark Spring Beans
+@Component can also be used
+All annotations are the same as fas as Spring is concerned
+
+@Service
+public class SimpleService
+{
+  @Autowired
+  SimpleRepository repository;
+
+  ...
+}
+
+@Repisitory
+public class SimpleRepository
+{
+...
+}
+
+
+Java Config
+-----------
+@Configuration marks class as Spring configuration
+@ComponentScan enables scanning in package(and subpackages)
+
+@Configuration
+@ComponentScan(basePackages="com.crescent")
+public class SystemConfigurationComponentScanning
+{}
+
+Why AOP?
+========
+AOP is a very important foundation of Spring
+and also Java EE
+AOP is used to implement enterprise features
+e.g.transactions, security...
+-Configurable middleware
+-and to simplify code
+
+-Just business logic
+ Exception Aspect,Tracing Aspect(logging), Transaction Aspect(boilerplate code is removed)
+
+
+Cross-cutting concerns
+----------------------
+Tracing, Exception Handling and Transactions are cross cutting concerns
+-i.e. a lot of classes and methods must implement them
+-can't be implemented in a single place
+-..if you use object-oriented programming only
+-Aspect-oriented programming allows centralized implementation of cross-cutting concerns.
+
+Developing with AOP
+-------------------
+-Implement business logic
+-Write Aspects for Cross cutting concerns
+-..or use Spring's Aspect Library
+-"Compose" your own infrastructure
+
+Use Spring AOP or AspectJ to weave aspects into the application
+Most commonly used AOP implementations
+Most powerful Java AOP implementations
+
+Without AOP :
+Code tangling:Multiple concerns in each piece of code
+Code Scattering:Aspects are not implemented in one place
+
+Aspect-oriented programming resolves these issues
+
+What is an Aspect?
+-Aspect implements cross cutting concern
+i.e. otherwise shattered throughout the code
+-Get rid of the boiler plate code!
+
+
+Aspect = Pointcut  + Advice
+
+Pointcut = Where the Aspect is applied
+Advice = What code is executed
+
+JoinPoint
+---------
+-Point in the control flow of a program
+-Advices can be presented with information about the join point
+
+e.g. method name,class name etc
+
+Enable Aspects in Spring XML Configuration
+------------------------------------------
+<beans>
+<aop:aspectj-autoproxy />
+<context:component-scan base-package="simpleaspect" />
+</beans>
+
+or
+
+@Configuration
+@EnableAspectJAutoProxyEnable@AspectAnnotation
+@ComponentScan(basePackages="Simpleaspect")
+public class SimpleAspectConfigration{
+}
+
+
+show - view - cross references
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

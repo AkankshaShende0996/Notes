@@ -1,0 +1,10 @@
+Access to cache is much faster than access to main memory
+
+Access to main memory - 100ns
+Access to L2 cache :7ns
+Access to the L1 cache : 0.5ns
+
+Size of the main memory:several GB
+Size of the L2 cache:256kb
+Size of the L1 cache:32kb
+

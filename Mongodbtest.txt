@@ -1,0 +1,266 @@
+If the value of totalKeysExamined is 30000 and the value of totalDocsExamined is 0, which of the following option is correct?
+
+Options
+
+The query used an index to fetch the results------------------
+The query returned 30000 documents after scanning the documents
+The query returned 0 documents
+None of the above
+
+
+A collection and a document in MongoDB is equivalent to which of the SQL concepts in SQL ?
+
+Options
+
+Table and row------------------
+Table and column
+Column and Row
+Database and Table
+
+What will be the equivalent MongoDB command for the following SQL command:
+SELECT author, count(*) FROM posts GROUP BY author HAVING count(*) > 1 
+
+
+
+db.posts.aggregate( [
+   {
+     $group: {
+        _id: "$author",
+        count: { $sum: 1 }
+     }
+   },
+   { $match: { count: { $gt: 1 } } }
+] )
+
+In our posts collection, which command can be used to find all the posts whose author names begin lie between "A" and "C" in dictionary order?
+db.posts.find( { post_author : { $gte : "A" , $lte : "C" } } );--------------
+db.posts.find( { post_author : { $gte : "C" , $lte : "A" } } );
+db.posts.find( { post_author : { $gt : "A" , $lt : "C" } } );
+This type of search is not supported by MongoDB. $lt and $gt operators are applicable only for numeric values.
+
+
+The difference between $push and $addToSet is:
+$addToSet adds the item to the field only if it does not exist already; while $push pushes the item to the field irrespective of whether it was present or not
+
+
+What does the following query do when performed on the posts collection?
+db.posts.update({_id:1},{Title:This is post with ID 1"})
+Updates the Title of the post
+Updating a document is possible only with $set 
+Replaces the complete document with _id as 1 with the document specified in second parameter------------------
+Syntax error
+
+To suppress the _id field from the result set, specify _________ in the projection document
+Hashed
+Unique
+Sparse--------------
+TTL
+
+Which of the following command can be used to check the size of a collection named posts?
+db.posts.stats()--------------
+db.posts.findStats()
+db.posts.find({stats:1})
+db.stats({ collection : posts })
+
+Which of the following operations on a single document will operate atomically?
+Update
+$push
+Both a and b
+None of the above
+
+n a replica set, a ________ number of members ensures that the replica set is always able to select a primary
+Odd------------ 
+Even
+Depends on the application architecture
+2 
+
+
+Question:
+Consider the following posts document:
+{
+    _id: 1,
+    post_text: "This is my first post",
+    author: "Tom",
+    tags: ["tutorial","quiz","facebook","learning","fun"]
+}
+Which of the following queries will return the documents but with only the first two tags in the tags array? 
+
+db.posts.find({author:"Tom"},{tags:{$slice:2}})
+db.posts.find({author:"Tom"}).limit({tags:2})
+db.posts.find({author:"Tom"}).limit($slice:{tags:2})
+Both a and c are valid. $slice works both with projection and limit.
+
+Which of the following does MongoDB use to provide High Availability and fault tolerance?
+
+Write Concern
+ Replication---------------
+Sharding
+ Indexing
+
+What does the following aggregate query perform?
+db.posts.aggregate( [
+       { $match : { likes : { $gt : 100, $lte : 200 } } },
+       { $group: { _id: null, count: { $sum: 1 } } }
+] );
+
+Calculates the number of posts with likes between 100 and 200-----------
+Groups the posts by number of likes (101, 102, 103) by adding 1 every time
+Fetches the posts with likes between 100 and 200 and sets their _id as null
+Fetches the posts with likes between 100 and 200, sets the _id of the first document as null and then increments it 1 every time
+
+Which of the following is correct explanation of MongoDB processes?
+
+mongod.exe is the shell process and mongo.exe is the actual database process
+mongo.exe is the shell process and mongod.exe is the actual database process-----------------------
+mongos.exe is the MongoDB server process needed to run database
+mongodump.exe can be used to import database backup dump 
+
+
+
+Which of the following can cause the database to be locked ?
+
+
+Issuing a Query
+Inserting data
+Map-reduce
+All of the above---------------
+
+Which type of indexes does MongoDB support?
+Compound Indexes
+Multikey Indexes
+Geospatial Indexes
+All of the above---------------
+
+
+
+Question:
+_______ index type, which indexes the hash of the value of a field.
+
+Hashed-----------
+Unique
+Multikey
+None of the mentioned
+
+
+Question:
+Given a collection posts as shown below having a document array comments, which of the following command will create an index on the comment author descending?
+{
+    "_id":1,
+    "post_text":"This is a sample post",
+    "author":"Tom",
+    "comments":[
+        {
+            "author":"Joe",
+            "comment_text":"This is comment 1"
+        },
+        {
+            "author":"Leo",
+            "comment_text":"This is comment 2"
+        }
+    ]    
+}
+db.posts.createIndex({"comments.$.author":-1});
+db.posts.createIndex({"comments.author":-1});------------------------------
+db.posts.createIndex({"comments.author":1});
+ 
+db.posts.createIndex({"comments.$.author": {"$desc":1}});
+
+
+Which of the following operator can be used to control the number of items of an array that a query returns?
+$
+$elemMatch
+$slice----------------------
+MongoDB does not support partial retirieval of items from an array
+
+
+What will be the equivalent MongoDB command for the following SQL command:
+SELECT author, count(*) FROM posts GROUP BY author HAVING count(*) > 1 
+
+ans :
+db.posts.aggregate( [
+   {
+     $group: {
+        _id: "$author",
+        count: { $sum: 1 }
+     }
+   },
+   { $match: { count: { $gt: 1 } } }
+] )
+
+
+Which of the following is a valid MongoDB JSON document:
+{}------------------
+{
+   "user_id"=1,
+   "user_name"="Joe Sanders",
+   "occupation"=["engineer","writer"]
+}
+{
+   "user_id":1;
+   "user_name":"Joe Sanders";
+   "occupation":["engineer","writer"]
+} 
+{
+   "user_id":1,
+   "user_name":"Joe Sanders",
+   "occupation":[
+        "occupation1":"engineer",
+        "occupation2":"writer"
+    ]
+}
+
+If the value of totalKeysExamined is 30000 and the value of totalDocsExamined is 0, which of the following option is correct?
+The query used an index to fetch the results
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

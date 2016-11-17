@@ -1,0 +1,50 @@
+Lambda Expressions
+Method references
+Default methods
+Type Annotations
+Generic Type changes and improvements
+
+Date-Time Package
+
+Java Stream API for Bulk Data Operations on Collections
+Collections
+java.util.stream
+Performance Improvement for HashMaps with Key Collisions
+
+JavaFX 	
+
+Scripting 
+ Nashorn Javascript Engine
+
+Concurrency 
+ java.util.concurrent
+    java.util.concurrent.ConcurrentHashMap	 	 	
+    java.util.concurrent.atomic
+    java.util.concurrent.ForkJoinPool
+    java.util.concurrent.locks.StampedLock
+
+JDBC
+ The JDBC-ODBC Bridge has been removed.
+
+ JDBC 4.2 introduces new features.
+
+forEach() method in Iterable interface
+default and static methods in Interfaces
+Functional Interfaces and Lambda Expressions
+Java Stream API for Bulk Data Operations on Collections
+Java Time API
+Collection API improvements
+Concurrency API improvements
+Java IO improvements
+Miscellaneous Core API improvements
+
+Lambda Expressions
+Interfaces 
+Collection API improvements
+Java Stream API for Bulk Data Operations on Collections
+Concurrency API improvements
+Java IO improvements
+JavaFX 	
+Scripting - Nashorn Javascript Engine
+JDBC
+Miscellaneous Core API improvements

@@ -1,0 +1,308 @@
+What is REST?
+
+REST Drivers
+-Heterogeneous Interoperability
+-Devices
+-The Cloud
+
+Architectural Style
+-Stands for "Representational state transfer"
+-First introduced in 2000 by Roy Fielding as a part of his doctoral dissertation
+-Intended for long-lived network-based applications
+
+REST and RPC
+------------
+RPC
+-Contract is a service and its operations
+-Action semantics are specified out of band
+-Error semantics are specified out of band
+-Limited caching support
+-Client and server ownership of the URL namespace
+-Inputs and outputs are tied to underlying runtime types
+-Can tunnel through multiple protocols
+
+
+REST
+-Contract is the uniform interface
+-Actions semantics are specified by the uniform interface and state
+ transitions are specified by hypermedia controls embedded in representations
+-Error semantics are specified by the uniform interface
+-Caching supported by all intermediaries which understand the uniform interface
+-Server owns the URL namespace
+-Inputs and outputs are tied to the mediatype specification
+-Tied to the uniform interface of the supporting protocol
+
+REST and HTTP
+-Most RESTful systems in use today are built on top of HTTP
+-HTTP provides the necessary controls to build RESTful systems
+
+Richardson's Maturity Model
+
+Level 3 :Hypermedia
+Level 2 :HTTP Verbs
+Level 1 :Resources
+Level 0 :POX
+
+Only Level 3 in this model can actually be considered REST
+
+
+Elements of the Uniform Interface
+-Identification of resources
+-Manipulation through representations
+-Self descriptive messages
+-Hypermedia as the engine of application state(HATEOAS)
+
+
+RESTFul Services in Java using Jersey
+-------------------------------------
+
+Jersey - Jax implementations
+
+REST was build with the pains of SOAP in mind
+Built on the principles of HTTP
+Services can return:
+-XML
+-JSON
+-HTML
+-Plain Text
+-Binary/octet
+
+RESTFul URLs
+Always centered around Nouns and never around verbs
+ https://localhost:8080/car-rental/cars
+ https://localhost:8080/car-rental/reservations
+Cars and Reservations are the Nouns
+Verbs are expressed through the protocol
+PUT
+POST
+GET
+DELETE
+
+Path is used to get a specific instance
+https://localhost:8080/car-rental/reservations/1234
+
+Prerequisite
+Java
+Spring STS
+Tomcat
+Maven
+
+
+Jars from Jersy :
+-----------------
+jersy-client.jar
+jersy-common.jar
+jersy-container-servlet-core.jar
+jersy-container-servlet.jar
+jersy-server.jar
+
+
+Project Layout
+--------------
+Standard Maven structure
+src/main/java
+src/main/resources
+src/main/webapp
+
+Libs are pulled in through Maven in the dependencies section
+web.xml is already configured with jersy servlet
+
+
+Creating a Service
+------------------
+The most basic service needs three things
+@Path - the path to the service
+@GET - the request method
+@Produces - the response type from the service
+
+e.g.
+
+@Path("myresource")
+public class MyResource
+{
+  @GET
+  @Produces(MediaType.TEXT_PLAIN)
+  public String getIt()
+  {
+      return "Got it !";
+  }
+}
+
+Richardson Maturity Model
+-------------------------
+Level 3 :Hypermedia
+Level 2 :HTTP Verbs
+Level 1 :Resources
+Level 0 :POX
+
+4 Levels of Maturity - we are focusing on level 2:
+
+Level 2 focuses on the HTTP Verbs
+Create, Read,Update and Delete
+Post,Get,Put and Delete
+The web really doesn't use Put and Delete
+Level 3 includes level 2, but puts a focus on Discoverability
+-HATEOS - HyperMedia As The Engine Of Application State
+
+
+
+
+HATEOS
+-HyperMedia as the Engine of Application State
+-The client interacts with the server through  hypermedia
+-The concept is to decouple client and server allowing them to evolve
+ Interaction begins with a fixed URL
+ Future interactions are detemined by the server
+
+
+CRUD Functions(Create,Read,Update,Delete)
+Level 2 of the RMM is about matching services with their HTTP Verbs
+The CRUD functions are mapped to their HTTP equivalents
+Create = POST
+Read = GET
+update = PUT
+Delete = DELETE
+Often times people will use POST for Create and Update
+
+JSON
+-----
+JavaScript Object Notation
+Preferred when working with JavaScript clients
+Looser way to represent data
+Flexible and easy to work with
+Often preferred because it is not XML
+Difficult to validate(where XML can validate data)
+
+@Produces(MediaType.APPLICATION_JSON)
+
+Why XML
+-------
+Often associated with SOAP
+Still a great solution for REST
+REST doesn't mean unstructured
+Easy to validate, confirm well formed
+
+@Produces(MediaType.APPLICATION_XML)
+
+Binary
+------
+-Not necessarily an alternative to JSON or XML
+-Used to serve objects(not java objects)
+ Files
+ Images
+ PDFs
+
+@Produces(MediaType.APPLICATION_OCTET_STREAM)
+
+
+Revise example
+--------------
+Basic example of a GET
+
+@GET
+@Produces(MediaType.TEXT_PLAIN)
+public String getIt()
+{
+   return "Got it";
+}
+Annotated with @GET
+Mapping is defined with @Path
+The URL is defined through our context/servlet mapping/@Path
+Content returned is defined with @Produces
+-Produces can take an Array of multiple types
+
+
+ActivityResource
+----------------
+Let's create a Service to retrieve all activities
+- Create Activity
+- Create ActivityRepository
+- Create ActivityResource
+  Annotate with GET
+http://localhost:8080/exercise-services/webapi/acitivities
+
+
+@XmlRootElement
+---------------
+MessageBodyWriter not found for media type=application/xml
+Jersy doesn't know how to marshal POJOs to XML
+-Need to define what the XmlRootElement is 
+-Can also rename other elements
+  @XmlElement
+-Can specify attributes too
+-Uses JAXB to do Java-to-XML
+
+
+JSON
+----
+MessageBodyWriter not found for media type=application/json
+
+JSON requires another Jar to be added to our pom.xml
+-jersey-media-moxy
+@Produces(MediaType.APPLICATION_JSON)
+a Weired gotcha:JAXB converts the POJO to XML and then XML to JSON
+-Our XML annotations affect JSON output
+
+@Produces
+---------
+-Can be used to produce multiple output formats
+-@Produces can take a String or an Array of Strings
+ @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML}) =>THIS CREATES ONE PROBLEM - RESPONSE?
+Need to use something besides our browser to set accept header
+-Most browsers support some type of posting tool e.g.
+ Chrome - Postman
+ Firefox - Poster
+
+
+
+
+Jersey Client
+-------------
+Building a client helps enforce a contract
+-Jersey has great client capabilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

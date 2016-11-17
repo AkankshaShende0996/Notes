@@ -1,0 +1,131 @@
+Course Agenda
+-------------
+Introduction
+Controllers & Markup
+Services
+Routing
+Directives
+Testing
+
+
+MV* Frameworks
+--------------
+Model 
+View
+Controller/Presenter/ViewModel
+
+open source library
+comprehensive(partial template,two way binding(new values automatically updated in model, don't require any event, routing)
+Testable
+extends html vocabulary(ex.directives)
+<input id="username" type="text" focus />
+html has autofocus - works on limited browser
+
+Angular thinks of HTML as it it had been designed to do what?
+Build applications instead of documents
+
+What kinds of tests does angular support?
+Unit tests and end to end tests
+
+Name one of the ways that angular is forward thinking
+WebComponents/Object.observe
+
+
+Angular Architecture
+---------------------
+Two way binding - no need to wait for any event, direct updates in model
+Dirty checking - no getter and setter
+DI
+
+Angular Components
+-------------------
+controller - contains logic and state
+
+view/Directives
+
+Service - real logic
+
+Quiz
+What is the central component in an angular application?
+Controller
+
+Directives are part of which component?
+View
+
+
+In which component should you put your complex business logic?
+Services
+
+
+Quiz
+----
+Can modules depend on other modules?
+Yes
+
+Should a small application use multiple modules?
+No
+
+What is the primary responsibility of the controller?
+Create the scope
+
+Is the scope the model?
+No
+
+Can the view bind fo functions on the scope?
+Yes
+
+service
+worker object
+
+why use Services?
+Reusable
+DI
+Testable
+SRP(Single Responsibility principle)
+
+
+Quiz
+True or False : In Angular, the term "service" refers to an 
+over-the-network service like a restful web service.
+False
+
+Why do we need services?
+Reusable, SRP, Testability(Due to DI)
+
+How is an Angular service different than any other service?
+It is registered with Angular so that Angular can inject it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+
+
+DevOps Principles
+Collaborate and work as one team
+Business and IT agility
+Complete automation
+Test & version application code
+Test & version infrastructure code
+Monitory & measure everything
+
+Continuous Integration
+------------------------
+Dev - Version Control Repository -CI Server =>Build(compile App Code), Unit Test App code
+Continuous Delivery(CD)
+
+Dev/IT Ops - Version Control Repository - CI Server - Deploy - Dev/Prod Environment
+
+Continuous Delivery
+Source -auto- Build -auto- Staging - 
+manual-Production
+
+
+Continuous Deployment
+Source -auto- Build -auto- Staging - auto-Production
+
+
+Continuous Integration & Continuous Deployment Principles
+Automate everything
+Define infrastructure as code
+Store application and infrastructure code in version control
+Unify the application and the infrastructure
+Perform end-to-end automated testing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,313 @@
+AWS
+Officially launched in 2006
+Largest cloud provider
+
+core services
+-Elastic Cloud Compute(EC2)
+-Simple Storage Service(S3)
+Relational Database Service(RDS)
+Route53
+
+
+Ehancing Your App with AWS Databases and Application Services(extended service)
+Elastic BeanStalk(EB)
+DynamoDB & RedShift
+Virtual Private Cloud(VPC)
+CoundFront
+CloudWatch
+
+
+different ways to access AWS - browser,commandline,application code
+
+can run any type of application
+-------------------------------------------------------------------
+
+AWS is a provider of Cloud Services
+
+NETFLIX- entire infrastructure running on AWS
+
+
+Why Depend on AWS?
+Low cost
+Easy Scalability
+
+server for serving web application
+server for database
+broadband
+dedicated room to keep all the hardwares for safety
+
+with AWS, there are no upfront costs
+
+with AWS you only pay what you uses
+
+AWS also provides handy calculator for the estimating cost
+
+
+Scalability
+successfully launched web app, no. of hits increased.
+web app dies as too many request
+what is option - to buy another server. which may take days,weeks..in the meantime users are suffering and ultimately killing the business.
+
+with aws takes few seconds only to add server
+
+
+Tracing the Global Infrastructure of AWS
+ability to deploy the app in different gloabl location
+Why Deploy Globally?
+Reduced Latency
+Increased Redundancy
+
+Get the webapplication closer(Germany,USA,Singapore..) to the user
+
+Scaling across Regions and AZ's(Availability Zones) increases redundancy 
+
+AWS Service Health Dashboard
+
+http://status.aws.amazon.com
+
+
+
+
+How AWS works
+-------------
+There is not a single protocol all the services use.
+Usually you r taking initiative to interact diff services.
+VPC and make local ipaddress
+
+AWS vs rest
+-----------
+Microsoft Azure
+-Coud services provider started around 2010
+
+Azure may be the advantage if you want to use IIS and windows virtual machines
+If you are working with .NET applications
+If you want the latest and greatest from Microsoft
+
+
+Microsoft Azure does not support following things
+If you need global reach
+If it lacks services from AWS that you need
+If you want the latest and greatest from Amazon(e.g. Lamda and Gateway)
+
+IBM Bluemix
+-----------
+Cloud services provider started around 2014
+
+implements the CLOUDFOUNDRY open source infrastructure specification
+
+IBM Bluemix supports
+--------------------
+If you want to be provider independent
+If you want your training and skills to be portable
+ 
+IBM Bluemix does not support
+----------------------------
+If you don't need portability
+If you want services not covered by CloudFoundry
+If you need protability and want the latest from IBM
+
+Heroku
+------
+Cloud services provider started around 2007
+
+Heroku app deployment is dead simple...but 
+it lacks the breadth and reach of AWS
+
+
+AWS
+---->
+Price+Scalability+Location
+
+
+
+Elastic Cloud Compute(EC2) - The solution for your computing needs
+launched in 2006
+virtual machine
+
+What can you do with EC2?
+------------------------
+Run Applications
+Virtual Desktop
+3rd Party Software
+Computing
+
+Elastic Cloud Compute
+Cloud Compute - Computing services operating in remote data servers around the world
+Elastic - Instances running computing operations can increase or decrease at will
+
+EC2 instance
+
+Amazon Machine Image(AMI)
+operating system + Software used on an EC2 Instance
+
+Amazon updates the image software...
+...not your instance
+
+EC2 Instances :
+Number of instances - 1 or 
+Auto scaling Group - Rules for automatically scaling EC2 images up and down
+
+Use EC2 for scaling AMIs
+Use EB for scaling applications
+
+
+Elastic Block Storage(EBS)
+
+
+Use EBS for EC2 file systems
+Use S3 for file storage
+
+Security Group - IP based communication rules for a single or group of service instances
+
+Example Security Group Scenarios
+Control who can SSH into EC2 instance
+Allow access between EC2 instances
+Allow access to database
+Accept http requests
+
+EC2 instances are charged by the hour
+Prices change based on: Instance Type , AMI Type
+
+EC2 Pricing Example
+Instance Type   AMI              Rate per hour
+r3.large       Amazon Linux      $0.166USD
+Daily Rate:$3.98USD
+
+t2.micro =>daily rate $0.31USD
+
+
+EC2 Instance Pricing Types
+On-Demand instances - cheap
+Reserved Instances - cheaper
+Spot Instances - Cheapest
+
+Simple Storage Service(S3)
+---------------------------
+The solution for your storage needs
+Maximum file size is 5 terabytes!
+
+bucket - where you add, modify, delete objects
+
+S3 Buckets can :
+-trigger events when objects are added/modified/deleted
+-preserve older versions of objects
+-replicate objects across regions
+
+S3 Buckets are accessed via URL
+
+S3 Bucket URL Example:
+https://s3-us-west-1.amazonaws.com/okfido.org/img/okfido.png
+region,bucket name and object path
+
+How to solve Latency in S3
+step 1:Use CloudFront
+step 2:Relax
+
+S3 Pricing Structure:
+Amount of Data Stored
+Number of Requests
+Amount of Data Transferred
+
+
+Prices differ per region
+
+ex. Oregon region
+Amount of Data Stored - $0.03 USD per GB
+Number of Requests - $0.005 USD per 1000 requests
+Amount of Data Transferred - $0.09 USD per GB
+
+
+Relational Database Service
+---------------------------
+Managed Database Aspects.
+Managed because Amazon web service takes care of
+-scheduled automated backups
+-simple software updates
+-managed infrastructure
+
+Database of EC2 vs RDS
+EC2
+Database backups
+redundancy
+software patches
+
+RDS
+AWS handles it all +
+easy configuration, read replicas
+
+RDS Database options
+mysql,PostgreSQL, SQLServer,MariaDB,Oracle,Amazon Aurora
+
+
+You can install a database with EC2 on your own... but
+having Amazon manage the database for you will save you headaches.
+
+RDS makes it easy to :
+take db snapshots
+change the hardware
+
+AWS takes security seriously.
+
+RDS Pricing structure:
+type of database
+region
+ec2 instance type
+ex.mysql database
+$o.35 USD perhour
+$8.40 USD per day
+
+Other Managed Database Offerings from Amazon
+DynamoDB(NoSQL Database)
+RedShift(Data Warehouse)
+
+Route53
+-------
+The solution for your DNS needs
+Domain Name System
+System that translates human-readable URLs to IP addresses.
+Route53 is core to letting users interact with services in AWS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

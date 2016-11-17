@@ -1,0 +1,110 @@
+var a=2;
+Console.log(a);
+In Javascript for string either you can use single or double quote
+
+semicolon is optional!
+
+converting from int to String
+int a=2;
+
+a=String(a);//explicit
+
+converting to number now
+b=Number(a);//explicit
+
+a=56;
+a=a+""; //implicit
+console - you will get black color value
+
+
+const var = 45 //check it new version of javascript
+
+Three types of variables :
+var a=23; //function scope
+
+let b=2;   //block scope
+const c=33 //block scope
+
+var a=20;
+
+if(a)---------what happens? condition : true
+{..}
+
+falsy value => 
+NaN e.g. 0 is NaN
+-10 or 10 are numbers.
+""
+false
+null
+undefined
+
+9420461569
+
+9623962298
+
+mh 12
+JU 3352
+
+var a=10;
+undefined
+
+void 42
+undefined
+
+in for loop all the clauses are optional
+e.g. for(;;)
+
+
+
+toFixed : how many decimal places you want
+var a=78.4444; console.log(a.toFixed(2));
+VM567:2  =>78.44
+
+
+function
+when we declare function
+like
+function foo(a,b) =>a and b are called as parameters
+
+when we pass we call it as arguments
+
+argument when you pass and parameter when you declare
+
+Javascript resources :
+https://developer.mozilla.org/en-US/docs/JavaScript
+https://github.com/rwldrn/idiomatic.js
+http://www.ecma-international.org/ecma-262/5.1
+http://wiki.ecmascript.org/doku.php?id=harmony:proposals
+
+
+
+Javascript has function scope only*
+
+var foo = "bar";
+function bar(){
+  var foo = "baz";
+}
+function baz(foo)
+{
+   foo="bam";
+   bam="yay";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+JUnit is a unit testing framework for Java.
+
+JUnit Features
+-Asserts
+-Test setup and teardown
+-Exception testing
+-Test suites
+-Parameterized testing
+-Assumptions
+-Rules
+-Theories
+-Integration with popular build systems
+
+In Java the smallest "unit" is class
+
+Watch outside in TestDriven Development
+
+The origin of the elite fighting force known as "JUnit"
+
+Kent Beck : Creator of SUnit which led to JUnit and all the derivatives thereof
+
+Early JUnit Timeline
+1994,SUnit Created
+1997, The JUnit flight
+2000 Junit.org
+2002 Eclipse IDE support
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

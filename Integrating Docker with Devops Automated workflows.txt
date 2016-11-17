@@ -1,0 +1,42 @@
+Integrating Docker with Devops Automated workflows
+
+
+source code - git -automated CI - Triggering image on docker hub --amazon web services(Production platform)
+
+deploying on production
+
+
+Dockerized App : An app configured to run in container(s)
+
+Dockerfile : Configuration file containing instructions on how to build a 
+Docker image.
+
+FROM centos:centos6
+MAINTAINER sanjaydegaonkar@capgemini.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

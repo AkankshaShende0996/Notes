@@ -1,0 +1,314 @@
+What is Gradle?
+Build by convention
+Groovy DSL (Written in Java)
+Supports dependencies(Ivy and Maven)
+Supports multi-project builds
+Easily customizable
+Declarative Build lang(expresses intent)
+Maintainable
+
+
+Ant (First Java tool)
+-xml build script (Hard to read and difficult to maintain)(same with Maven also)
+
+Gradle file demo :(no scripting, no xml)
+----------------------------------------
+repositories{
+   mavenCentral()
+}
+apply plugin:'java'
+version=0.1
+dependencies
+{
+  testCompile group:'org.hamcrest',name:'hamcrest-core',version:'1.3'
+  testCompile 'junit.junit:4.12'
+  testCompile group: 'org.hamcrest', name:'hamcrest-library',version:'1.3'
+}
+
+apply plugin : 'org.unbroken-demo.test.
+
+Installing Gradle
+-From the web site
+ http://gradle.org
+
+Using gvm
+-Groovy environment Manager
+-http://gvmtool.net/
+
+Running Gradle for the First time
+---------------------------------
+Gradle Builds
+-Gradle has a build file
+ Typically build.gradle
+
+This contains tasks
+ And plugins
+ And dependencies
+ But mostly tasks
+
+
+>gradle task
+
+>gradle build
+
+What is task
+-------------
+-Code that Gradle executes
+ Has a lifecycle
+ Has properties
+ Has 'actions'
+    first action
+    last action
+ Has dependencies
+
+
+project.task("Task1")
+task("Task2")
+task "Task3"  doesn't need ()
+task Task4
+Task4.description="Task 4 Description"
+
+now run gradle tasks
+
+Build Phases
+------------
+-Initialization Phase
+ Used to configure multi project builds
+
+-Configuration Phase
+ Executes code in the task that's not the action
+ 
+ Task myTask
+ {
+    description "myTask configuration"
+ }
+
+-Execution Phase
+ Execute the task actions
+ Task myTask
+ {
+   doFirst
+   doLast
+ }
+
+Task Dependencies
+-----------------
+Task6.dependsOn Task5
+=> in this case Task5 is executed before Task6
+Task5.dependsOn Task4
+
+execute it from shell
+>gradle Task6
+
+other dependencies :
+ -mustRunAfter
+shouldRunAfter
+ -If two task execute one should run after the other
+ -This ignores circular dependencies
+
+Building a Java Project
+-----------------------
+-----------------------
+Java Plugin
+-----------
+
+apply plugin 'java'
+
+
+build
+clean
+javadoc
+compile
+run...........many task
+
+Supports Standard Layout:
+src/main/java
+src/main/resources
+src/test/java
+src/test/resources---------same as Maven
+
+If you want to change standard layout Gradle has SourceSets
+
+SourceSets:
+If you have a different convention
+ can configure the layout using a source set
+
+Configure the Layout:
+---------------------
+sourceSets{
+  main{
+    java{
+       srcDir 'src/java'
+    }
+    resources{
+    srcDir 'src/resources'
+    }
+  }
+}
+
+Basic Single Project Build:
+-build.gradle file
+ add the Java plugin
+-Create source directories and add sources
+
+Writing your first Java Build in build.gradle
+---------------------------------------------
+
+apply plugin:'java'
+
+>gradle tasks
+
+version = '1.0.SNAPSHOT'
+
+>gradle build
+ contains no. of steps
+ 
+>gradle clean
+
+>gradle compileJava
+
+to reduce build time :
+>gradle --daemon clean
+>gradle --daemon build
+
+Writing a Multi-project Build
+-----------------------------
+Add top level settings.gradle
+ -List of all the projects in the build
+Add top level build.gradle
+ -defines project wide build functionality
+
+build.gradle
+------------
+allprojects{
+ apply plugin:'java'
+}
+project{':Repository'){}
+project{'"JavcketService'){
+ dependencies
+ {
+    compile project(':Repository')
+ }
+}
+
+
+Now build the project
+
+
+converting from maven/core java project to gradle
+gradle init
+
+
+
+To find out project dependencies
+gradle -q dependencies 
+
+
+Gradle Cache
+------------
+Modules are cached
+-File based
+-Meta data and files stores seprately
+-Repository caches are independent
+
+-Can safely delete cached files
+
+Junit report in gradle
+----------------------
+sdegaonk- demos-decuritytools-build-reports-tests-index.html
+
+
+Why Build Server
+----------------
+Continuous integration is very important
+If not CI then at least nightly builds
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

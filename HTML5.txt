@@ -1,0 +1,110 @@
+article:
+self contained document, page etc
+
+In theory could be independently distributed
+Forum post
+Blog post
+Article
+Individual email
+Comments
+
+changed elements:
+-----------------
+-address
+For contact details of the author not for postal address
+(name,email..can have multiple options in single address tag)
+
+-cite
+ Technically, no longer used to mark up a name of a speaker
+
+-dl
+ Now expended to cover any name/value groups
+
+-em, i, hr
+
+-<ol>
+ You can now use start in the ol header
+ <ol start=5>
+ Reversed reverses the count
+ -not yet implemented in any browser
+
+-S
+ was used to indicate a strike through
+ Still used to indicate content that is
+ no longer accurate
+ no longer relevant
+
+-small
+ No longer means make the print small
+ Now used for "small print" as in legal documents
+
+-strong
+ indicates importance
+
+-b
+ indicates bold witout indicating importance
+
+
+Forms
+-----
+=>New input types
+Date
+Time 
+Month
+Week Range Search
+Telephone
+Email
+Color
+
+=>Data List
+
+=>Progress & Meter
+
+Video
+No standard across browsers
+MP4 is not free - there are 
+IE and Safari currently support mp4
+WEBM - the current alternative
+
+<video> element
+ src (takes a url)
+ controls 
+ autoplay
+ poster(takes a url)
+ preload
+    none
+    metadata
+    auto
+
+ex.
+<video controls width="720" height="400" src="test.mp4"></video>
+
+
+
+Audio
+No one standard across browsers
+IE and Safari currently only support MP3
+MP3 is not free-there are patent/license issues
+
+Canvas 
+-------
+The <canvas> element
+2d vs 3d(webgl)
+ webgl only in browsers that implement WebGL library
+Start with Rectangles
+
+Canvas
+ Stroke - border
+ Filld - Solid
+ Clear - to remove section of solid
+
+
+
+
+
+
+
+
+
+
+

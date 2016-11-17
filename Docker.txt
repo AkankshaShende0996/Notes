@@ -1,0 +1,218 @@
+------------------------------
+difficult to emulate environment(mangodb,oracle,tomcat,asp.net..)
+works on my machine..not in yours
+
+https:www.docker.com
+   Products
+     Docker Toolbox
+       Docker Compose
+       Docker Engine
+       Docker Machine
+       Docker Registry
+       Docker Swarm
+       Kitamatic
+
+images : tomcat, helloworld.. on dockerhub
+How to pull image
+Ex : docker pull node
+
+docker-machine ip
+The role of images and containers
+Docker image : Ubuntu with node.js and application code
+Docker image -----------> Dcoker container
+created by using an image. runs your application.
+
+containers are the instance of image 
+
+docker ps
+docker ps -a
+docker compose -up => to run all containers?
+docker-compose up -d
+docker-cmpose build => info about maintainer,environment..
+
+--------------------------------
+
+What is Docker?
+Benefits
+Tools
+
+What is Docker?
+lightweight, open, secure platform
+simplify building, shipping, running apps
+Shipping container system for code
+Runs natively on Linux or Windows Server
+Runs on Windows or Mac Development machines(with a virtual machine)
+
+Relies on "images" and "containers"
+
+The Role of Images and Containers
+---------------------------------
+Docker image: 
+example: Ubuntu with Node.js and Application Code
+
+Docker Container
+Created by using an image. Runs your application.
+
+Image
+A read-only template composed of layered filesystems used to share common
+files and create Docker container instances.
+
+Container
+An isolated and secured shipping container created from an image that can be
+run, started, stopped, moved and deleted.
+
+
+
+Where Does Docker Run?
+on linux or windows server
+
+Docker containers vs Virtual machines
+-------------------------------------
+virtual machines always run on top of the o.s.
+
+
+can have multiple containers
+container for database
+container for cache
+container for application code
+
+
+Benefits
+--------
+set up development environment very quickly
+eliminate app confilicts
+environment consistency e.g. development and production
+Ship Software faster
+
+set up development environment very quickly
+we may have web server, caching server, database server
+
+different version running on different container
+Docker is NOT the same as using Virtual Machines
+Docker Tools:
+Docker toolbox, Docker machine, Docker Compose, Docker Kitematic, VirtualBox
+
+https://www.docker.com/docker-toolbox
+provides image and container tools
+Virtual machine(for windowns/Mac)
+Works on Windows, Mac, Linux
+
+
+Docker in Action
+----------------
+
+Dockerhub - cloud based repository
+
+Docker Machine commands :
+-------------------------
+docker-machine ls
+docker-machine start[machine name]
+docker-machine stop[machine name]
+docker-machine env[machine name]
+docker-machine ip[machine name]
+
+docker-machine ls
+docker-machine ip default
+docker-machine status default
+>Running
+
+Key Docker Client Commands:
+docker pull[image name]
+
+docker run[image name]
+
+To list all images
+docker images
+
+
+docker ps => process
+
+docker => to view all commands
+
+rm - remove one or more containers
+rmi - remove one or more images
+export - export a container's filesystem as a tar archive
+pull - pull an image or a repository from a registry
+push - push an image or a repository to a registry
+run - run a command in a new container
+
+https://hub.docker.com
+find out "hello-world" image
+
+
+docker pull hello-world
+
+
+docker images => you will see hello-world
+
+docker run hello-world
+docker ps =>running containers
+
+docker ps -a => to view all containers in a system
+
+
+To remove container:e.g.24f77ed8e465
+>docker rm 24
+
+to remove images:e.g.0a6ba7834
+docker rmi [image id]
+>docker rmi 0a
+
+
+Docker machine creates and manages machines
+Docker client manages images and containers
+
+------------------------------------------
+Module Agenda
+The Layered File System
+Containers and Volumes
+Source Code, Volumes and Containers
+Hooking a Container volume to source code
+Removing containers and volumes
+
+How do you get source code into a container?
+=> Create a container volume that points to the source 
+code.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

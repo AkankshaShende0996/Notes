@@ -1,0 +1,648 @@
+MongoDB != RDBMS
+
+Independance Mismatch
+//Your application code
+class Foo
+{
+  int x;
+  String[] tags;
+}
+
+x   name
+1   Abc
+2   Xyz
+
+tagId  x
+33     1
+34     2
+33     2
+
+tagId  tag
+33     'red'
+34     'blue'
+
+
+Mongo document for Foo
+{x:1, tags:['abc','xyz']}
+
+Scalability - MongoDB
+No schema (no rows, tables, columns..)
+Single document write scope
+
+Capped Collection - fix size
+
+Mongo accepts writes only in primary DB
+If any updates occur in primary same is replicate to secondary
+
+
+MongoDB is written in C++, available in 32 and 64 bit
+
+Mongos - sharding server
+
+>md \data\db
+default directory
+
+>Mongod 
+to start server
+
+ctrl+c to close server
+
+no other o.s. issues, framework..
+just mongod server
+     mongo client
+
+mongod --help | more
+
+
+
+mongod.conf
+
+#where data files will reside
+dbpath=/Pluralsight/db
+
+#where the log file will be stored
+logpath=/Pluralsight/mongo-server.log
+
+#how verbose the server will be logging
+verbose=vvvvv------------anything range between 1 to 5 1-least verbose  5-max verbose
+
+
+now you can start server using mongo.conf file
+>mongod -f d:\Pluralsight\mongod.conf
+
+will get the output
+all output going to d:/pluralsight/mongo-server.log
+
+>more d:\pluralsight\mongo.conf
+
+
+>mongod -f d:\pluralsight\mongod.conf --install
+
+>net start mongodb
+ The Mongo DB service was started successfully---------require administrative privileges
+
+>net start
+ to view all running services
+
+>net start | findstr Mongo
+ Mongo DB
+
+>net stop mongodb
+ to stop the service
+
+>net start | findstr Mongo
+ now you won't find this service
+
+>Mongo
+>show dbs
+ to view databases
+
+ local 0.07GB
+ Mongo uses local database for internal purpose
+
+>db
+test
+>use foo - to switch to diff database
+>db
+ foo
+
+>help 
+ to view mongodb commands
+
+
+Replica Sets
+------------
+Single Server Danger
+tradional way
+if primary db goes down...with the help of backup 
+
+Minimal Replica Set in MongoDB
+------------------------------
+1)Primary DB -only in primary, write operation is allowed
+
+2)Secondary DB -read only database, can have many instances of Secondary DB
+
+3)Arbitrary DB
+
+
+
+To read from secondary server :
+>mongo --port 40000
+>db.foo.find()
+error
+>db.setSlaveOk()
+ slaveOk is also a connection level setting
+
+kill primary server - simply by closing window
+domo:secondary>db.foo.find()
+               you will find record
+
+db.getMongo()
+connection to 127.0.1:40000
+
+
+Storage Internals :
+Your application - server memory - Disk
+
+how is data formatted?
+BSON(bsonspec.org) for details
+Binary JSON is binary encoded serialization of JSON like documents.
+Like JSON, BSON supports the embedding of documents and arrays.
+
+
+
+Saving Data :
+rule 1)
+A document must have an _id field.
+
+if you don't assign,Mongo will assign _id
+
+rule 2)
+There are very few rules.
+
+The size of document is currently 16MB (one of the limitations)
+
+>db
+>show collections
+collection <=> table
+
+Saving record :
+>db.foo.save({_id:1, x:10})
+db - database
+foo - collection
+save - cmd to save record
+>db.foo.find()
+
+>show collections
+foo - not surprising as we have created
+system.indexes - surprising ! uses this indexing(id) -fast access
+
+>db.system.indexes.find()
+
+data type :
+>db.foo.save({_id:1})
+>db.foo.save({_id:3.14})
+>db.foo.save({_id:"Hello"})
+>db.foo.save({_id:ISODate()})
+>db.foo.save({_id:{a:'x'.b:2}})
+
+>db.foo.save({_id:[1,2,3]})
+_id cannot be an array
+
+>db.users.save({Name:'Bob'})-----------still fine
+ Mongo assign id automatically
+
+
+>db.users.find()
+{ "_id" : ObjectId("51b88888888"),"Name":"Bob"}
+
+>ObjectId()
+ can get objectid 
+>ObjectId()
+
+>ObjectId().getTimestamp()
+
+what happens when we save 2 different documents<=>row with same id
+>db.foo.save({_id:1,name:'bob'})
+>db.foo.save({_id:1,price:1.99})...........no error
+
+>db.foo.find()
+{"_id":1,"price":1.99}
+Second document is stored over first one..
+
+>db.bar.insert({_id:1,x:10})
+>db.bar.insert({_id:1,name:'bob'})
+duplicate key error index
+
+save command overrides documents
+
+>db.aaa.insert({x:1})
+>db.aaa.insert({x:1})-------------no error
+Mongo driver generates id not mongoserver
+>db.aaa.find()
+ two diff objects for id you will find it.
+
+id you can consider as email id
+
+
+
+db.foo.save({_id:'data')
+
+if you save duplicate _id then "nmatched":1
+
+db.foo.save({_id:"data1"})
+
+
+If the doucment contains an _id field, then the save() method performs an upsert querying the collection on the _id field.
+
+For save, if you provide _id, it will update. If you don't, it will insert.db
+
+
+
+WriteResult.nUpserted
+The number of documents inserted by an upsert.
+
+WriteResult.nInserted
+The number of documents inserted, excluding upserted documents. 
+
+
+Save vs insert
+--------------
+
+Assume that _id=11 already present
+
+ db.foo.insert with id 11 will give you error
+while save will update.
+save is a wrapper for update and insert. Functionally, save and insert are very similar, especially if no _id value is passed. However, if an _id key is passed, save() will update the document, while insert() will throw a duplicate key error.
+
+Save Danger
+
+db.a.save({_id:1,x:10,y:3})
+
+so id is 1 
+    x is 10
+    y is 3
+
+db.a.save({_id:1,x:11})------------y will be deleted
+
+
+update :
+
+db.foo.update(query,update,options);
+
+db - database
+foo - collection
+query - which document
+update - what change
+options - one? many? upsert?
+
+db.a.save({_id:1,x:10});
+db.a.update({_id:1}, {$inc:{x:1}})
+
+Set operator
+------------
+db.a.save({_id:1,x:10});
+db.a.update({_id:1},({$set:{y:3}})
+db.a.update({_id:1},({$inc:{x:1}})
+id 1  x  11  and y 3
+
+Unset operator
+--------------
+>db.a.find()
+{"_id":1,"x":11,"y":3}
+>db.a.update({_id:1},{$unset:{y:''}})
+ or
+>db.a.update({id:1},{$unset:{y:0}})
+
+rename
+------
+db.a.save({_id:1,Naem:"bob"})
+
+db.a.update({_id:1}, {$rename:{'Naem':"Name'}})  where 'Naem' N is case sensitive
+
+
+
+$push for Array
+---------------
+db.a.save({_id:1})
+
+db.a.update({_id:1},{$push:{things:'one'}})
+
+db.a.update({_id:1},{$push:{things:'two'}})
+
+db.a.update({_id:1},{$push:{things:'three'}})
+db.a.update({_id:1},{$push:{things:'three'}})-------three added twice
+
+if we don't want duplicates use addToSet
+
+addToSet
+--------
+db.a.update({_id:1},{$addToSet:{things:'four'}})
+db.a.update({_id:1},{$addToSet:{things:'four'}})
+
+pull
+----
+to remove all "three", can't remove single three
+
+db.a.update({_id:1},{$pull:{things:'three'}})
+db.a.update({_id:1},{$addToSet:{things:'three'}})
+
+
+pop
+---
+If you don't know exact location
+to remove array element
+db.a.update({_id:1},{$pop:{things:1}}) to remove last element
+db.a.update({_id:1},{$pop:{things:-1}}) to remove first element
+
+
+If you want to update only one record - findAndModify
+
+findAndModify
+-------------
+db.foo.findAndModify({
+query : <document>,       which document
+update :<boolean>,       what change?
+upsert :<boolean>,
+remove :<boolean>,       delete it?
+new : <boolean>,         return new/old?
+sort:<doucment>,         query order?
+fields:<document>});     return what?
+
+if you have multiple records with same, only one record will be updated.
+
+we have to decide based on order(first or last)
+
+find():
+-------
+db.foo.find(query,projection)
+query - which doucment
+projection - how many fields
+
+db.animals.find({_id:1}) - entire document you will get it
+where _id=1;
+
+
+
+Projection
+-----------
+specific column - only id column, not other columns
+
+
+
+db.animals.find({_id:{$gt:5}},{_id:1})
+
+select id from animals
+db.animals.find({},{_id:1})
+
+
+Comparison
+----------
+db.animals.find({_id:{$gt:5}},{_id:1})
+
+                      $gt,$gte,$lt,$lte
+
+db.animals.find({_id:{$gt:2,$lt:4}},{_id:1})
+
+
+$not
+----
+db.animals.find({_id:{$not:{$gt:2}}},{_id:1}) - can use less than also
+
+$in
+---
+find the records whose id is 1 or 3
+db.animals.find({_id:{$in:[1,3]}},{_id:1})
+
+db.animals.find({_id:{$nin:[1,3]}},{_id:1})
+
+Arrays
+------
+find out animals who is cute or ocean or both
+
+db.animals.find({tags:{$in:['cute','ocean']}},{name:1})
+
+find out animals who are cute and ocean both
+db.animals.find({tags:{$all:['cute','ocean']}},{name:1})
+db.animals.find(tags:{$nin:['cute']}} {name:1})
+
+db.animals.find({_id:1}).pretty()--------------------------------Answer : create a question
+{
+  "_id":1,
+  "name" :"cat",
+  "tags":[
+          "land",
+          "cute"
+         ],
+
+    "info":{"type":mammal",
+    "color":red"
+    }
+}
+
+Dot notation
+------------
+
+>db.animals.find({"info.canFly":true}).pretty()
+
+db.animals.find({info:{type:'bird',canFly:true}},{name:1})
+{"_id":6,"name":"duck"}
+
+db.animals.find({info:{canFly:true,type:'bird'}},{name:1})------------no records matching
+                                                                      sequence matters in MongoDB
+db.animals.find({info:{type:'bird'}},{name:1}) - no records matching
+                                                 not exist all records
+
+db.animals.find({"info.canFly":true,"info.type":'bird'},{name:1})
+now you will get records
+{"_id":6,"name":"duck"}
+
+null and $exists
+----------------
+db.animals.find({"info.canFly":true},{name:1})
+=>duck
+
+db.animals.find({"info.canFly":false},{name:1})
+=>Penguin
+db.animals.find({"info.canFly":null},{name:1})
+
+
+Assume that with some documents, canFly does not exist
+to check existed record only
+db.animals.find({"info.canFly":{$exists:true}},{name:1})
+
+show the documents which do not have field
+db.animals.find({"info.canFly":{$exists:true}},{name:1})
+
+all
+---
+db.animals.find({tags:{$all:['cute','ocean']}},{name:1})
+    
+And
+----
+db.animals.find({"info.type":'bird',tags:'cute'},{name:1}
+comma between the criteria performs like "And"
+
+db.animals.find({"info.type":'bird',tags:'ocean'},{name:1}
+
+Dot Notation
+------------
+db.animals.find({"info.canFly":true}).pretty()
+
+More Projection
+---------------
+db.animals.find({_id:1},{_id:1})
+{"_id":1}
+
+db.animals.find({_id:1},{_id:1,name:1})
+{"_id":1,"name":"cat"}
+
+if you want to exclude fields specify 0
+db.animals.find({_id:1},{_id:0,name:0,info:0}) 
+{"tags":["land","cute"]}
+
+
+db.animals.find({_id:1},{name:1,info:1})
+=> id also comes
+
+to exclude the id, explicitly I have to specify 0 to _id
+db.animals.find({_id:0},{name:1,info:1})
+
+you cannot mix 0 and 1 ??
+
+Cursor 
+------
+var c=db.animals.find({},{name:1})
+c.size()
+=>6
+c.hasNext()
+true
+c.forEach(function(d){print(d.name)})
+=>
+cat
+rabbit
+shark
+dolphin
+penguin
+duck
+
+c.hasNext()
+=>false
+
+sort
+----
+db.animals.find({},{name:1}).sort({name:1})
+
+1 = Ascending 
+-1 = Descending
+
+we can sort with subdocument field also
+e.g.
+db.animals.find({},{name:1,"info.type":1}).sort({"info.type":1."name":1})
+
+limit
+-----
+db.animals.find({},{_id:1}).sort({_id:-1}).limit(3)
+exact 3 or less than 3 recs you will find it.
+
+
+skip
+db.animals.find({},{_id:1}).sort({_id:-1}).skip(1).limit(2)
+
+
+
+some GUI's are available for MongoDB, some of them commercials and some of them are free
+
+Command line benefits
+-Free
+-Interactive
+-Scriptable
+-Makes you proficient
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

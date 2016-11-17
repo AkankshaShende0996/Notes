@@ -1,0 +1,403 @@
+TDD
+
+What is Test-Driven Development(TDD)
+
+Development approach keeping tests one step ahead of your code.
+
+Test-Driven Development -> Test Driven Design
+
+
+Problems with the traditional approach
+-Omission of thought in automated unit testing approach
+
+-Benefits of automation missed
+
+-Time crunch encountered in projects
+
+-Mountain of work to implement the automated unit test
+
+
+How you benefit
+-Balance between automated testing and functional coding during development sprints
+-Consistent repeatability of test execution
+-Up-front design with testing in mind
+-More even gauge of progress between testing and coding
+
+
+Red/Green/Refactor
+
+
+Myth - Coding effort increases significantly
+
+-"Doesn't all this testing double the development?
+
+-Question you should be asking - "If you are not automating your unit test, then how are you executing
+ the unit tests in a repeatable and consistent manner?
+-Over time, you will never manually unit test all cases in a repeatable manner with less effort than creating
+ the test up-front; you are sacrificing quality
+
+
+The following link contains some analysis and calculations - 
+http://c2.com/cgi/wiki?UnitTestingCostBenefits
+
+Myth - All tests are written before any code
+
+-How do I write all my tests before I have written a line of functional code?
+
+-You don't
+ -Follow red/green/refactor
+ -Stub out methods for important conditions.
+
+
+Testing Frameworks :
+-Mockito
+-DBUnit
+-PowerMockito
+
+H2 Database
+-Relational database written in Java
+-Support for in-process & out-of-process execution
+-In- memory in-process database is good for automated unit testing
+
+Overview of Junit Testing Concepts
+Setup -> Execution ->Verification ->Teardown
+
+All annotations listed are in the 'org.junit' package
+@Test
+
+Verification methods
+-org.junit.Assert.*
+-HamcrestMatcherAssert
+
+e.g.
+
+Using Assert:
+ Assert.assertEquals("Brown",customer.lastName());
+ // Or using static imports this is specified as
+ assertEquals("Brown",customer.lastName());
+
+Using Hamcrest
+ MatcherAssert.assertThat(customer.lastName(),IsEqual.equalTo("Brown"));
+ //Or using static imports this is specified as
+ assertThat(customer.lastName(),equalTo("Brown"));
+
+
+Mocking Cocepts :
+-----------------
+-Methods under test often leverage dependencies
+
+Testing with dependencies creates challenges
+-Live database needed
+-Multiple developers testing simultaneously
+-Incomplete dependency implementation
+
+-Mocking frameworks give you control
+
+
+Mocking Options
+-Implement the mocked functionality in a class
+ This approach is tedious and obscure
+
+Leverage a mocking framework
+-Avoid class creation
+-Leverages the proxy pattern
+
+Multiple options - Mockito, EasyMock, JMock
+
+
+Mockito Overview
+-----------------
+
+Support unit testing cycle
+
+Setup -> Execution ->Verification->Teardown
+
+Setup - Creating the mock
+  OrderDao mockOrderDao=Mockito.mock(OrderDao.class)
+
+Setup - Method stubbing
+ Mockito.when(mockOrderDao.findById(idValue)).thenReturn(orderFixture)
+
+Verification
+ Mockito.verify(mockOrderDao).findById(idValue)
+
+
+Createing Mock Instances
+------------------------
+-Mockito.mock(Class<?>class) is the core method for creating mocks
+-@Mock is an alternative
+class OrderServiceTest
+{
+   protected @Mock OrderDao mockOrderDao;
+
+
+
+ @Before
+ public void setup()
+ {
+    MockitoAnnotations.initMocks(this);
+ }
+
+ @Test
+ public void test_getOrderSummary{
+   //you can use mockOrderDao
+ }
+}
+
+
+Method Stubbing
+---------------
+-Provides capability to define how method calls behave via when/then pattern
+-Calling Mockito.when(..) returns OngoingStudb<T>, specifying how the invocation behaves
+ thenReturn(..)
+ thenThrow(..)
+ thenCallRealMethod(..)
+ thenAnswer(..)
+
+thenReturn(..)
+ Specifies object or value to return when method called
+
+thenThrow(..)
+ Specifies mock invocation should result in exception thrown
+
+
+thenCallRealMethod(..)
+ When mocking a class, delegate calls to the underlying instance with thenCallRealMethod(..)
+
+Verifications
+-------------
+Mockito.verify(..) is used to verify an intended mock operation was called
+
+//setup
+Mockito.when(mockOrderService.getOrderSummary(customerId)).thenReturn(orderList);
+
+//Verification
+Mockito.verify(mockOrderService).getOrderSummary(customerId);
+
+Avoid issues later - Verify your interactions!
+
+VerificationMode allows extra verification of the operation
+//Verification
+Mockito.verify(mockOrderService, VerificationSettings.times(2)).getOrderSummary(customerId);
+
+times(n)
+atLeastOnce()
+atLeast(n)
+atMost(n)
+never()
+
+Verifying no interactions globally
+Mockito.verify(..).zeroInteractions()
+Mockito.verify(..).noMoreInteractions()
+
+Mockito Feature Deep-Dive :
+---------------------------
+OrderEntity orderEntityFixture =..
+Mockito.when(mockOrderDao.findById("23")).thenReturn(orderEntityFixture);
+
+Implicit argument matching
+-Reference types use the equals(..) method
+-Value types use the '==' operator
+
+Explicit argument matchers provide flexibility
+-These typically make the stub more generic
+-If any arguments are explicit, all must be explicit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

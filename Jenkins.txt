@@ -1,0 +1,144 @@
+Jenkins
+
+
+About Jenkins
+-------------
+CI software which runs on server
+typically called as build server
+-open source
+ lic. free
+-web based Java tool
+-supports .net,can run on Android and iPhones
+-Highly extensible
+ YOu will find many plugins on jenkins(almost with any source control)
+
+History
+-------
+started around 2007 as Hudson
+Rapid rise in popularity in 2008
+
+2011 after dispute .. jenkins
+Hudson - Oracle/Eclipse
+Jenkins - Kohsuke Kawaguchi
+both has some common basic features..
+Jenkins has some additional features
+
+
+What is Continuous Integration?
+-------------------------------
+
+CI as best practice
+combine our code(from diff developers) everytime we check in.
+
+Where Jenkins fits in
+----------------------
+allows us to continuous integration on build server
+
+Developer(checkin)---------source control<----------Jenkins------>build o/p----Report back-------Developer
+
+
+Installing Jenkins
+------------------
+Prerequisite
+-java 1.5 or higher
+-Java in your path(optional, but preferred)
+-Web server(only if you want to host outside of Jenkins)
+
+download .war file
+
+Release(latest)
+Long Term Support Release(stable)
+
+after downloading war files, unzip it.
+
+go to command prompt:
+>java -jar jenkins.war
+ jenkins in fully up and running
+now go to browser
+localhost:8080
+-You should get Jenkins home page
+
+shut down the server(ctrl+c)
+Another way to start jenkins
+>java -jar jenkins.war --httpPort=8081
+
+jenkins in fully up and running
+
+on browser : localhost:8081
+
+
+for https
+java -jar jenkins.war --httpPort=-1 --httpsPort=6767
+
+Our Build Process:
+-----------------
+Check in changes
+Get latest
+Build source
+Build tests
+Run tests
+Report results
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
